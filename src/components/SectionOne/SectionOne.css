@@ -1,0 +1,20 @@
+
+.paragraph{
+  
+        color: #7c848c;
+        font-size: 18px;
+        font-weight: 900;
+        margin-top: 118px;
+ 
+}
+.background {
+    background-color: #f2f0f0;
+}
+span.cletter {
+    font-size: 30px;
+    font-family: cursive;
+    color: #e4b3a3;
+}
+img.onesidegirl.img-fluid {
+    height: 381px;
+}

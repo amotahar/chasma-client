@@ -1,0 +1,13 @@
+.our-service-img{
+    margin:0 auto;
+    text-align:center
+}
+
+.our-service-img img {
+    height: 141px;
+}
+.main-col:hover{
+    box-shadow: 2px 2px 10px 10px#1e1f1c78;
+    cursor: pointer;
+    transition: all 0.5s;
+}
