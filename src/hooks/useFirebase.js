@@ -1,164 +1,144 @@
-import {useState,useEffect} from 'react'
-import initilaizeFirebase from './../components/Firebase/firebase.init';
-import { getAuth,FacebookAuthProvider,updateProfile,getIdToken ,signInWithPopup, createUserWithEmailAndPassword,signInWithEmailAndPassword ,signOut,onAuthStateChanged  } from "firebase/auth";
+import firebaseInIt from "../firebase/firebase.init.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+firebaseInIt();
+const auth = getAuth();
 
+const useFirebase = () => {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
-
-
-// initilaize Firebase  App
- initilaizeFirebase();
- const auth = getAuth();
-//  facebook provider 
-const facebookProvider= new FacebookAuthProvider();
-const useFirebase=()=>{
-    // Handle user
-    const [user,setUser]=useState({})
-    // handle loging
-    const [loding,setLoding]=useState(true);
-    // admin handle
-    const [admin,setAdmin]=useState(false)
-    // error heandl 
-    const [error,setError]=useState('')
-    // verify user with token
-  const [token,setToken]=useState('')
-    // Handle Registation 
-    const registerUser=(email,password,name)=>{
-        setLoding(true)
-        createUserWithEmailAndPassword(auth,email,password)
-        .then(()=>{
-            // error
-            setError('')
-          const newUser={email,displayName:name}
-          setUser(newUser)
-          // save user database
-          saveRegUser(email,name,'POST')
-        })
-        // send name in firebase
-        updateProfile(auth.currentUser,{
-          displayName:name
-        })
-        .catch((error)=>{
-          setError(error.message);
-        })
-       
-        .finally(()=>setLoding(false))
-    }
-
-
-    // Handle login
-    const loginUser=(email,password,location,history)=>{
-        setLoding(true)
-        signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const redirect = location?.state?.from || "/";
-    history.replace(redirect);
-// error
-    setError('')
-
-  })
-  .catch((error) => {
-    setError(error.message);
-  })
-  .finally(()=>setLoding(false))
-
-    }
-
-// handle facebook
-    const handleFacebookSignIn=(location,history)=>{
-        signInWithPopup(auth,facebookProvider)
-        .then(result=>{
-           
-           const{displayName,photoURL,email}=result.user;
-           const loggedInUser={
-               name:displayName,
-               email:email,
-               photo:photoURL
-           }
-           setUser(loggedInUser);
-           saveRegUser(user.email,user.displayName,'PUT')
-           setError('');
-           const redirect = location?.state?.from || "/";
-           history.replace(redirect)
-        })
-       
-        .catch((error) => {
-            // An error happened.
-            setError(error.message);
-
-          })
-          .finally(()=>setLoding(false))
-
-    }
-
-
-    // Handle Logout 
-    const logOut=()=>{
-       setLoding(true)
-
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            setError('')
-          }).catch((error) => {
-            // An error happened.
-            setError(error.message);
-
-          })
-          .finally(()=>setLoding(false))
-
-    }
-
-    // handle admin
-    useEffect(()=>{
-      fetch(`https://guarded-badlands-04784.herokuapp.com/users/${user.email}`)
-      .then(res=>res.json())
-      .then(data=>setAdmin(data.admin))
-    },[user.email])
-
-// Handle user state change
-    useEffect(()=>{
-      setLoding(true);
-    const unsubscribe =   onAuthStateChanged(auth, (user) => {
-            if (user) {
-              setUser(user)
-              getIdToken(user)
-              .then(idToken=>{
-                setToken(idToken);
-              })
-            } else {
-            setUser('')
-            }
-            setLoding(false);
-          });
-          return () => unsubscribe;
-    },[])
-
-    // save register user in database 
-    const saveRegUser=(email,displayName,method)=>{
-      const user={email,displayName};
-      fetch('https://guarded-badlands-04784.herokuapp.com/users',{
-        method:method,
-        headers:{
-          'content-type':'application/json'
-        },
-        body: JSON.stringify(user)
+  //register
+  function UserRegister(newUserData, history) {
+    const { name, email, password } = newUserData;
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        setUserName(name);
+        addUserToDB(name, email);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Registered",
+          text: "Have a fun!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setUser(result.user);
+        history.replace("/");
       })
-      .then()
-    }
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Oops..",
+          text: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .finally(() => setLoading(false));
+  }
+  // add user to db
+  function addUserToDB(name, email) {
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name, email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {});
+  }
 
-    return{
-        user,
-        loding,
-        handleFacebookSignIn,
-        error,
-        token,
-        admin,
-        registerUser,
-        loginUser,
-        saveRegUser,
-        logOut,
+  // set username
+  function setUserName(name) {
+    updateProfile(auth.currentUser, {
+      displayName: name,
+    })
+      .then(() => {})
+      .catch((error) => {});
+  }
 
-    }
+  // Get the currently signed-in user
 
-}
+  useEffect(() => {
+    const unsubscribed = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser({});
+      }
+      setLoading(false);
+    });
+    return () => unsubscribed;
+  }, []);
+
+  // login
+  function userLogin({ email, password, history, redirect }) {
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Logged in!!",
+          text: "Have a fun!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setUser(result.user);
+        history.replace(redirect);
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Oops..",
+          text: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .finally(() => setLoading(false));
+  }
+
+  // logout
+  function logout() {
+    setLoading(true);
+    signOut(auth)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Logged out!",
+          text: "Have a fun!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setUser({});
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Oops..",
+          text: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .finally(() => setLoading(false));
+  }
+
+  return { UserRegister, ...user, loading, userLogin, logout };
+};
 
 export default useFirebase;

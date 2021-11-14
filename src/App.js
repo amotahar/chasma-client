@@ -1,76 +1,52 @@
-// import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router,Switch,Route } from 'react-router-dom';
-import Home from './components/Home/Home';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Dashboard from './components/Dashboard/Dashboard';
-import Explore from './components/Explore/Explore';
-import AdminPost from './components/AdminPost/AdminPost';
-import Login from './components/Login/Login/Login';
-import Register from './components/Login/Register/Register';
-import AuthProvider from './context/AuthProvider/AuthProvider';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import PlaceOrder from './components/PlaceOrder/PlaceOrder';
-import ConfirmOrder from './components/ConfirmOrder/ConfirmOrder';
-import ManageOrder from './components/ManageOrder/ManageOrder';
-import CreateAdmin from './components/CreateAdmin/CreateAdmin';
-import Payment from './components/Payment/Payment';
-import NotFound from './NotFound/NotFound';
-import Revew from './components/Revew/Revew';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./assets/css/main.css";
+import Footer from "./components/Footer.js";
+import ContextProvider from "./contexts/ContextProvider.js";
+import Home from "./pages/Home.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Login from "./pages/Login.js";
+import Register from "./pages/Register.js";
+import Dashboard from "./pages/Dashboard.js";
+import PrivateRoute from "./protectedRoute/PrivateRoute.js";
+import Products from "./components/Products.js";
+import PlaceOrder from "./pages/PlaceOrder.js";
+import PageNotFound from "./pages/PageNotFound.js";
+import Header from "./components/Header.js";
 
 function App() {
   return (
-    <div >
-   <AuthProvider>
-   <Router>
-       <Switch>
-         <Route exact path="/">
-           <Home></Home>
-         </Route>
-         <Route exact path="/home">
-           <Home></Home>
-         </Route>
-         <PrivateRoute  path="/dashboard">
-          <Dashboard></Dashboard>
-         </PrivateRoute>
-         <Route exact path="/register">
-         <Register></Register>
-           </Route>
-         <Route exact path="/login">
-           <Login></Login>
-           </Route>
-         <Route   path="/explore">
-         <Explore></Explore>
-         </Route>
-         <PrivateRoute path='/confirmOrder/:id'>
-           <ConfirmOrder></ConfirmOrder>
-         </PrivateRoute>
-         <Route path="/manageOrder">
-           <ManageOrder></ManageOrder>
-         </Route>
-         <Route path="/createAdmin">
-           <CreateAdmin></CreateAdmin>
-         </Route>
-         <Route   path="/adminPost">
-         <AdminPost></AdminPost>
-         </Route>
-         <Route path="pay">
-           <Payment></Payment>
-         </Route>
-         <Route path="revew">
-           <Revew></Revew>
-         </Route>
-         <Route path='placeOrder/>id'>
-           <PlaceOrder></PlaceOrder>
-         </Route>
-         <Route path="*">
-           <NotFound></NotFound>
-         </Route>
-       </Switch>
-       
-     </Router>
-   </AuthProvider>
-    </div>
+    <ContextProvider>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Home></Home>
+          </Route>
+          <Route exact path="/home">
+            <Home></Home>
+          </Route>
+          <PrivateRoute path="/dashboard">
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+          <Route path="/register">
+            <Register></Register>
+          </Route>
+          <Route path="/products">
+            <Products></Products>
+          </Route>
+          <PrivateRoute path="/placeorder/:id">
+            <PlaceOrder></PlaceOrder>
+          </PrivateRoute>
+          <Route path="*">
+            <PageNotFound></PageNotFound>
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </ContextProvider>
   );
 }
 
