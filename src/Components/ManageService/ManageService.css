@@ -1,0 +1,7 @@
+.userMainData{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.userMainData .card-img-top{
+    width: 300px !important;
+}

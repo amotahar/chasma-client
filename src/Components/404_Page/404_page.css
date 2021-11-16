@@ -1,0 +1,11 @@
+.not_fund_oage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+.not_fund_oage h2{
+    color: red;
+    font-weight: 700;
+    font-size: 60px;
+}

@@ -1,0 +1,17 @@
+.footer{
+    background-color: #001132;
+    color: #fff;
+    padding-top: 150px;
+    padding-bottom: 50px;
+    
+}
+.footer h2{
+font-weight: 600;
+font-size: 32px;
+}
+.footer li,
+.footer a{
+    color: rgb(19, 19, 19);
+    text-decoration: none;
+    list-style: none;
+}

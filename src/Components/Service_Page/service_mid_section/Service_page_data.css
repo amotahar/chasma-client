@@ -1,0 +1,14 @@
+.service_page{
+    margin-top: 100px;
+   border: 1px solid #ddd;
+   padding: 15px 10px;
+   border-radius: 10px;
+
+}
+.service_page img{
+    width: 80px;
+}
+.service_page h2{
+    font-size: 25px;
+    font-weight: 700;
+}

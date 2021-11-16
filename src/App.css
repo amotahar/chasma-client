@@ -1,0 +1,111 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+
+.btn-primary{
+    background-color: #4E16B2 !important;
+    border-color: transparent !important;
+    padding: 9px 15px;
+    border-radius: 10px;
+}
+.primary-font-size{
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.second-font-size{
+    font-size: 60px;
+    color: #fff;
+    font-weight: 600;
+}
+.btn-primary{
+    color: #fff !important;
+    font-size: 16px;
+    font-weight: 600;
+}
+.heading_style_color{
+    color: #007BFF;
+}
+.theme-color{
+    color: #4E16B2;
+    font-family: 'Caveat', cursive;
+}
+
+.ser-img{
+    width: 100% !important;
+    height: auto !important;
+ }
+
+Link{
+    text-decoration: none !important;
+}
+.MyOrderData .card{
+    flex-direction: inherit !important;
+}
+.spinner{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+
+
+/* Media screen */
+
+@media only screen and (max-width: 600px) {
+    .second-font-size {
+        font-size: 35px;
+        color: #fff;
+        font-weight: 600;
+    }
+    .primary-font-size {
+        font-size: 18px;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .banner {
+        height: 463px !important;
+    }
+    .footer h2 {
+        font-weight: 600;
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    .login{
+        width: 100% !important;
+    }
+    .Blue_spase {
+        height: auto !important;
+        padding-top: 20px;
+    }
+    .Speciel_section .wrap {
+        margin-left: 26px !important;
+    }
+    .manage-order{
+        width: 80% !important;
+    }
+    .MyOrderData .card {
+        flex-direction: column !important;
+    }
+    .MyOrderDataWidth{
+        width: 100% !important;
+    }
+    .userMainData {
+        width: 100% !important;
+    }
+    .userMainData h2{
+        width: 70%;
+        margin: auto;
+    }
+    .MakeAdmin .row{
+        width: 100% !important;
+    }
+    .review .card{
+        width: 100% !important;
+    }
+    .dashBordLogo{
+        display: none;
+    }
+  }

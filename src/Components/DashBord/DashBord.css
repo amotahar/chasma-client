@@ -1,0 +1,55 @@
+.MuiBox-root{
+    
+}
+.DashBord{
+    margin-top: 200px !important;
+    margin-bottom: 200px !important;
+}
+.review{
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+}
+.css-ahj2mt-MuiTypography-root{
+    color: #fff;
+}
+.payment{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.PaymentDetiels{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.dashImg{
+    width: 6%;
+    top: 114px;
+    position: absolute;
+    left: 25px;
+}
+.dashText{
+    position: absolute;
+    top: 129px;
+    left: 114px;
+    font-size: 27px;
+    font-weight: 700;
+}
+.Manane_All_Order{
+    background-color: #191919;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: 113px;
+}
+.MakeAdmin{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.css-1c99szj-MuiRating-icon{
+    color: rgb(255 255 255) !important;
+}
+.focus{
+    
+}
+
+.css-1xh6k8t {
+    color: rgb(255 255 255) !important;
+}

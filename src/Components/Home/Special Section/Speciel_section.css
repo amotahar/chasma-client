@@ -1,0 +1,29 @@
+.Speciel_section{
+    background: #191919;
+    padding: 100px 0;
+    padding-bottom: 150px;
+}
+.Speciel_section h2{
+    font-size: 40px;
+    font-weight: 700;
+}
+.Speciel_section .wrap{
+margin-left: 70px;
+}
+.Speciel_section img{
+position: relative;
+}
+.Speciel_section .img-overlay{
+position: absolute;
+top: 26%;
+right: 33px;
+
+}
+.Speciel_section .img-overlay h2{
+    
+font-size: 50px;
+}
+.Speciel_section li,
+.Speciel_section p{
+font-size: 18px;
+}

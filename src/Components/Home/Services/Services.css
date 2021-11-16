@@ -1,0 +1,28 @@
+.Services{
+   background: #191919;
+   padding-bottom: 120px;
+}
+.Services h2{
+   margin-top: 50px;
+   font-size: 40px;
+   font-weight: 700;
+   color: #fff;
+}
+.Services p{
+   font-size: 15px;
+   font-weight: 500;
+   color: rgb(68, 68, 68);
+}
+.card-title{
+   font-weight: 700;
+}
+
+.ser-img{
+   width: 100% !important;
+   height: auto !important;
+}
+.Product_card_Home{
+   border-radius: 10px;
+   border: 1px solid #ddd;
+   padding: 10px;
+}
